@@ -28,10 +28,9 @@ def perform_query() -> Response:
     # вернуть пользователю сформированный результат
 
     with open(file) as f:
-        res = query(cmd1, value1, f)
-        res = query(cmd2, value2, res)
-        res = '\n'.join(res)
-    return app.response_class(res, content_type="text/plain")
+        res = query(str(cmd1), str(value1), f)
+        res = query(str(cmd2), str(value2), iter(res))
+    return app.response_class('\n'.join(res), content_type="text/plain")
 
 
 if __name__ == "__main__":
